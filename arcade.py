@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #Ella Adam
-#1/15/2021
+#1/15/2021 --> 3/12/2021
 
 import pygame
 from pygame.locals import *
@@ -33,7 +33,7 @@ screen_height=600
 screen=pygame.display.set_mode((screen_width, screen_height))
 
 #Music for game
-pygame.mixer.music.load('Platformer2.mp3')
+pygame.mixer.music.load('Music/Platformer2.mp3')
 pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
 pygame.mixer.music.play()
 
@@ -82,7 +82,7 @@ def music():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('Platformer2.mp3')
+                pygame.mixer.music.load('Music/Platformer2.mp3')
                 pygame.mixer.music.play() 
                 
             if event.type==pygame.KEYDOWN:
@@ -97,7 +97,7 @@ def music():
                     if selected=="off":
                         pygame.mixer.music.stop()
                     if selected=="on":
-                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.load('Music/Platformer2.mp3')
                         pygame.mixer.music.play()
                     if selected=="return":
                         main_menu()
@@ -158,7 +158,7 @@ def main_menu():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('Platformer2.mp3')
+                pygame.mixer.music.load('Music/Platformer2.mp3')
                 pygame.mixer.music.play()
             
             if event.type==pygame.KEYDOWN:
@@ -248,7 +248,7 @@ def game_library():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('Platformer2.mp3')
+                pygame.mixer.music.load('Music/Platformer2.mp3')
                 pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
@@ -467,7 +467,7 @@ def pong():
                     screen_width=800
                     screen_height=600
                     screen=pygame.display.set_mode((screen_width, screen_height))
-                    pygame.mixer.music.load('Platformer2.mp3')
+                    pygame.mixer.music.load('Music/Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()
                           
@@ -514,7 +514,7 @@ def pong():
      
         #Detect collisions between the ball and the paddles
         if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
-            pygame.mixer.music.load('paddle.wav')
+            pygame.mixer.music.load('Music/paddle.wav')
             pygame.mixer.music.play()            
             ball.bounce()
         
@@ -553,7 +553,7 @@ def P1():
     YELLOW = (255,255,0)
     BLACK = (0,0,0)   
     
-    pygame.mixer.music.load('Positive-game-notification.mp3')
+    pygame.mixer.music.load('Music/Positive-game-notification.mp3')
     pygame.mixer.music.play()
     
     again = True
@@ -567,7 +567,7 @@ def P1():
                 quit()
                 #If quit is not hit, loop music
             #elif event.type == pygame.constants.USEREVENT:
-                #pygame.mixer.music.load('Platformer2.mp3')
+                #pygame.mixer.music.load('Music/Platformer2.mp3')
                 #pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
@@ -583,7 +583,7 @@ def P1():
                         pygame.mixer.music.stop()
                         pong()
                     if selected=="no":
-                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.load('Music/Platformer2.mp3')
                         pygame.mixer.music.play()                        
                         game_library()
                             
@@ -636,7 +636,7 @@ def P2():
     YELLOW = (255,255,0)
     BLACK = (0,0,0)   
     
-    pygame.mixer.music.load('Positive-game-notification.mp3')
+    pygame.mixer.music.load('Music/Positive-game-notification.mp3')
     pygame.mixer.music.play()
     
     again = True
@@ -650,7 +650,7 @@ def P2():
                 quit()
                 #If quit is not hit, loop music
             #elif event.type == pygame.constants.USEREVENT:
-                #pygame.mixer.music.load('Platformer2.mp3')
+                #pygame.mixer.music.load('Music/Platformer2.mp3')
                 #pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
@@ -666,7 +666,7 @@ def P2():
                         pygame.mixer.music.stop()
                         pong()
                     if selected=="no":
-                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.load('Music/Platformer2.mp3')
                         pygame.mixer.music.play()                        
                         game_library()
                             
@@ -874,7 +874,7 @@ def breakout():
                     screen_width=800
                     screen_height=600
                     screen=pygame.display.set_mode((screen_width, screen_height))
-                    pygame.mixer.music.load('Platformer2.mp3')
+                    pygame.mixer.music.load('Music/Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()            
      
@@ -914,7 +914,7 @@ def breakout():
                 else:
                     screen_width=800
                     screen_height=600                    
-                    pygame.mixer.music.load('Platformer2.mp3')
+                    pygame.mixer.music.load('Music/Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()
                     quit()
@@ -944,14 +944,14 @@ def breakout():
         if pygame.sprite.collide_mask(ball, paddle):
             ball.rect.x -= ball.velocity[0]
             ball.rect.y -= ball.velocity[1]
-            pygame.mixer.music.load('paddle.wav')
+            pygame.mixer.music.load('Music/paddle.wav')
             pygame.mixer.music.play()            
             ball.bounce()
      
         #Check if there is the ball collides with any of bricks
         brick_collision_list = pygame.sprite.spritecollide(ball,all_bricks,False)
         for brick in brick_collision_list:
-            pygame.mixer.music.load('paddle.wav')
+            pygame.mixer.music.load('Music/paddle.wav')
             pygame.mixer.music.play()            
             ball.bounce()
             score += 1
@@ -978,7 +978,7 @@ def breakout():
                 else:
                     screen_width=800
                     screen_height=600                    
-                    pygame.mixer.music.load('Platformer2.mp3')
+                    pygame.mixer.music.load('Music/Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()
                     quit()                
@@ -1027,7 +1027,7 @@ def ReplayL():
     again = True
     selected ="yes"
 
-    pygame.mixer.music.load('wah-wah-wah-sound-effect.mp3')
+    pygame.mixer.music.load('Music/wah-wah-wah-sound-effect.mp3')
     pygame.mixer.music.play()    
     
     while again:
@@ -1038,7 +1038,7 @@ def ReplayL():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                #pygame.mixer.music.load('Platformer2.mp3')
+                #pygame.mixer.music.load('Music/Platformer2.mp3')
                 pygame.mixer.music.stop() 
             
             if event.type==pygame.KEYDOWN:
@@ -1054,7 +1054,7 @@ def ReplayL():
                         pygame.mixer.music.stop()                        
                         breakout()
                     if selected=="no":
-                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.load('Music/Platformer2.mp3')
                         pygame.mixer.music.play()                        
                         game_library()
                             
@@ -1098,7 +1098,7 @@ def ReplayW():
     print("Replay Winner!!!")
     again = True
     selected ="yes"
-    pygame.mixer.music.load('game-new-level-sound-effect.mp3')
+    pygame.mixer.music.load('Music/game-new-level-sound-effect.mp3')
     pygame.mixer.music.play()    
     while again:
         for event in pygame.event.get():
@@ -1108,7 +1108,7 @@ def ReplayW():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-               # pygame.mixer.music.load('Platformer2.mp3')
+               # pygame.mixer.music.load('Music/Platformer2.mp3')
                 pygame.mixer.music.stop() 
             
             if event.type==pygame.KEYDOWN:
@@ -1124,7 +1124,7 @@ def ReplayW():
                         pygame.mixer.music.stop()
                         breakout()
                     if selected=="no":
-                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.load('Music/Platformer2.mp3')
                         pygame.mixer.music.play()                        
                         game_library()
                             

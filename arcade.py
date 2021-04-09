@@ -408,7 +408,8 @@ def space():
             self.laser = []
             self.cool_down_counter = 0
             
-        def draw(self)
+        def draw(self, screen):
+            pygame.draw.rect(screen)
     
 
     start = True

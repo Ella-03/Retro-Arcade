@@ -402,6 +402,13 @@ def space():
         def __init__(self, x, y, color, health=100):
             self.x = x
             self.y = y 
+            self.health = health
+            self.ship_img = None
+            self.laser_img = None
+            self.laser = []
+            self.cool_down_counter = 0
+            
+        def draw(self)
     
 
     start = True

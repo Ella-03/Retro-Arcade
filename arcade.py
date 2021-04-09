@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #Ella Adam
-#1/15/2021 --> 3/12/2021 --> 4/02/2021
+#1/15/2021 --> 3/12/2021 --> 4/02/2021 --> 4/09/2021
 
 import pygame
 from pygame.locals import *
@@ -23,6 +23,7 @@ import math
 
 # Game Initialization
 pygame.init()
+pygame.font.init()
 
 # Center the Game Application
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -149,6 +150,16 @@ def music():
 
 # Main Menu
 def main_menu():
+    
+    WHITE = (255,255,255)
+    DARKBLUE = (36,90,190)
+    LIGHTBLUE = (0,176,240)
+    RED = (255,0,0)
+    ORANGE = (255,100,0)
+    YELLOW = (255,255,0)
+    BLACK = (0,0,0)     
+    
+    
     menu = True
     selected ="start"
     while menu:
@@ -188,7 +199,7 @@ def main_menu():
         # Main Menu UI
         
         #Screen (AKA Background) 
-        screen.fill(black)
+        screen.fill(BLACK)
         
         title=text_format("OddBall Gaming", font, 90, green)
         
@@ -230,6 +241,15 @@ def main_menu():
 
 #Game Selecting Screen
 def game_library():
+    
+    WHITE = (255,255,255)
+    DARKBLUE = (36,90,190)
+    LIGHTBLUE = (0,176,240)
+    RED = (255,0,0)
+    ORANGE = (255,100,0)
+    YELLOW = (255,255,0)
+    BLACK = (0,0,0)     
+    
     #print("I'm switching screens!!!")
     print("""
     Use the number keys to select the game you want to play, then hit \"enter\":
@@ -239,7 +259,7 @@ def game_library():
     4 = Return""")
     
     library = True
-    selected ="battleship"
+    selected ="space"
     while library:
         for event in pygame.event.get():
             
@@ -253,7 +273,7 @@ def game_library():
             
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_1 or event.key==pygame.K_UP:
-                    selected="battleship"
+                    selected="space"
                 elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
                     selected="pong" 
                 elif event.key==pygame.K_3 or event.key==pygame.K_DOWN:
@@ -266,9 +286,9 @@ def game_library():
                     quit()            
                     
                 if event.key==pygame.K_RETURN:
-                    if selected=="battleship":
-                        #print("Battleship is running")
-                        battleship()
+                    if selected=="space":
+                        #print("Space is running")
+                        space()
                         
                     if selected=="pong":
                         #print("Pong is running")
@@ -277,7 +297,7 @@ def game_library():
                         pong()
                         
                     if selected=="break":
-                        #print("Space Shooters is running")
+                        #print("Breakout is running")
                         pygame.mixer.music.stop()
                         breakout()
                     
@@ -288,14 +308,14 @@ def game_library():
         # Main Menu UI
         
         #Screen (AKA Background) 
-        screen.fill(black)
+        screen.fill(BLACK)
         
         title=text_format("SELECT A GAME", font, 90, green)
         
-        if selected=="battleship":
-            text_battle=text_format("BATTLESHIP", font, 75, blue)
+        if selected=="space":
+            text_space=text_format("SPACE SHOOTERS", font, 75, blue)
         else:
-            text_battle = text_format("BATTLESHIP", font, 75, white)
+            text_space = text_format("SPACE SHOOTERS", font, 75, white)
             
         if selected=="pong":
             text_pong=text_format("PONG", font, 75, blue)
@@ -303,9 +323,9 @@ def game_library():
             text_pong = text_format("PONG", font, 75, white)
             
         if selected=="break":
-            text_space=text_format("BREAKOUT", font, 75, blue)
+            text_bout=text_format("BREAKOUT", font, 75, blue)
         else:
-            text_space = text_format("BREAKOUT", font, 75, white)        
+            text_bout = text_format("BREAKOUT", font, 75, white)        
                 
         if selected=="return":
             text_back=text_format("RETURN", font, 75, blue)
@@ -315,17 +335,17 @@ def game_library():
             #Only for "Select a Game"
         title_rect=title.get_rect()
         
-        battle_rect=text_battle.get_rect()
-        pong_rect=text_pong.get_rect()
         space_rect=text_space.get_rect()
+        pong_rect=text_pong.get_rect()
+        bout_rect=text_bout.get_rect()
         back_rect=text_back.get_rect()
 
         # Main Menu Text
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         
-        screen.blit(text_battle, (screen_width/2 - (battle_rect[2]/2), 210))
+        screen.blit(text_space, (screen_width/2 - (space_rect[2]/2), 210))
         screen.blit(text_pong, (screen_width/2 - (pong_rect[2]/2), 270))
-        screen.blit(text_space, (screen_width/2 - (space_rect[2]/2), 330))
+        screen.blit(text_bout, (screen_width/2 - (bout_rect[2]/2), 330))
         
         screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 390))
         
@@ -339,9 +359,89 @@ def game_library():
         
 #---------------Gameing Screens------------------------------------------
 
-def battleship():
-    print("HI")
- 
+def space():
+    #print("Hi. I'm Space Shooters")
+    
+    pygame.init()
+    pygame.mixer.music.stop()
+    
+    # Open a new window
+    size = (800, 600)
+    screen = pygame.display.set_mode(size)
+    pygame.display.set_caption("Space Shooters")
+    
+    
+    #Colors
+    WHITE = (255,255,255)
+    DARKBLUE = (36,90,190)
+    LIGHTBLUE = (0,176,240)
+    RED = (255,0,0)
+    ORANGE = (255,100,0)
+    YELLOW = (255,255,0)
+    BLACK = (0,0,0)
+    
+    level = 1
+    lives = 5    
+    
+    #Images
+    red_ship = pygame.image.load(os.path.join("img", "red-ship.png"))
+    blue_ship = pygame.image.load(os.path.join("img", "blue-ship.png"))
+    green_ship = pygame.image.load(os.path.join("img", "green-ship.png"))
+    player_ship = pygame.image.load(os.path.join("img", "player-ship.png"))
+    
+    red_laser = pygame.image.load(os.path.join("img", "red-laser.png"))
+    blue_laser = pygame.image.load(os.path.join("img", "blue-laser.png"))
+    green_laser = pygame.image.load(os.path.join("img", "green-laser.png"))
+    yellow_laser = pygame.image.load(os.path.join("img", "yellow-laser.png"))
+    
+    
+    bg = pygame.image.load(os.path.join("img", "bg-black.png"))   
+
+    
+    class Ship:
+        def __init__(self, x, y, color, health=100):
+            self.x = x
+            self.y = y 
+    
+
+    start = True
+    FPS = 60
+    clock = pygame.time.Clock()
+     
+        
+        # -------- Main Program Loop -----------
+    while start:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: # If user clicked close
+                start = False # Flag that we are done so we exit this loop
+            elif event.type == pygame.K_ESCAPE:
+                pygame.quit()
+             
+            elif event.type == pygame.KEYDOWN:
+                if event.key==pygame.K_BACKSPACE: #Pressing the ESC Key will quit the game
+                    screen_width=800
+                    screen_height=600
+                    screen=pygame.display.set_mode((screen_width, screen_height))
+                    pygame.mixer.music.load('Music/Platformer2.mp3')
+                    pygame.mixer.music.play()                    
+                    game_library()      
+        screen.fill(BLACK) 
+        
+        #Display the score and the number of lives at the top of the screen
+        font = pygame.font.Font(None, 34)
+        text = font.render("Level: " + str(level), 1, WHITE)
+        screen.blit(text, (20,10))
+        text = font.render("Lives: " + str(lives), 1, WHITE)
+        screen.blit(text, (650,10))        
+        
+        
+        
+        pygame.display.update() 
+        clock.tick(60)
+              
+    
+    
     
 
 def pong():

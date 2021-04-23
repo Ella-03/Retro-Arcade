@@ -47,23 +47,17 @@ def text_format(message, textFont, textSize, textColor):
 
 
 # Colors
-white=(255, 255, 255)
-black=(0, 0, 0)
-gray=(50, 50, 50)
-red=(255, 0, 0)
-green=(0, 255, 0)
-blue=(0, 0, 255)
-yellow=(255, 255, 0)
-
 
 WHITE = (255,255,255)
+BLUE = (0, 0, 255)
 DARKBLUE = (36,90,190)
 LIGHTBLUE = (0,176,240)
 RED = (255,0,0)
 ORANGE = (255,100,0)
 YELLOW = (255,255,0)
-BLACK = (0,0,0) 
-
+GREEN = (0, 255, 0)
+BLACK = (0,0,0)  
+GRAY = (50, 50, 50)
 # Game Fonts
 font = "Retro.ttf"
 
@@ -108,23 +102,23 @@ def music():
         #Screen (AKA Background) 
         screen.fill(black)
         
-        title=text_format("OPTIONS", font, 90, green)
-        music=text_format("MUSIC:", font, 50, yellow)
+        title=text_format("OPTIONS", font, 90, GREEN)
+        music=text_format("MUSIC:", font, 50, YELLOW)
         
         if selected=="off":
-            text_off=text_format("OFF", font, 75, blue)
+            text_off=text_format("OFF", font, 75, BLUE)
         else:
-            text_off = text_format("OFF", font, 75, white)
+            text_off = text_format("OFF", font, 75, WHITE)
             
         if selected=="on":
-            text_on=text_format("ON", font, 75, blue)
+            text_on=text_format("ON", font, 75, BLUE)
         else:
-            text_on = text_format("ON", font, 75, white)
+            text_on = text_format("ON", font, 75, WHITE)
             
         if selected=="return":
-            text_back=text_format("RETURN", font, 75, blue)
+            text_back=text_format("RETURN", font, 75, BLUE)
         else:
-            text_back = text_format("RETURN", font, 75, white)            
+            text_back = text_format("RETURN", font, 75, WHITE)            
 
         title_rect=title.get_rect()
         music_rect=music.get_rect()
@@ -150,14 +144,18 @@ def music():
 
 # Main Menu
 def main_menu():
-    
+
     WHITE = (255,255,255)
+    BLUE = (0, 0, 255)
     DARKBLUE = (36,90,190)
     LIGHTBLUE = (0,176,240)
     RED = (255,0,0)
     ORANGE = (255,100,0)
     YELLOW = (255,255,0)
-    BLACK = (0,0,0)     
+    GREEN = (0, 255, 0)
+    BLACK = (0,0,0)  
+    GRAY = (50, 50, 50)
+    
     
     
     menu = True
@@ -175,8 +173,11 @@ def main_menu():
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_UP or event.key==pygame.K_1:
                     selected="start"
-                   
+                    
                 elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
+                    selected="credits"                
+                   
+                elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
                     selected="quit"
                 '''    
                 elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
@@ -192,6 +193,9 @@ def main_menu():
                     if selected=="options":
                         music()   
                     '''    
+                    if selected=="credits":
+                        credits()
+                    
                     if selected=="quit":
                         pygame.quit()
                         quit()
@@ -201,41 +205,51 @@ def main_menu():
         #Screen (AKA Background) 
         screen.fill(BLACK)
         
-        title=text_format("OddBall Gaming", font, 90, green)
+        title=text_format("OddBall Gaming", font, 90, GREEN)
         
         if selected=="start":
-            text_start=text_format("START", font, 75, blue)
+            text_start=text_format("START", font, 75, BLUE)
         else:
-            text_start = text_format("START", font, 75, white)
+            text_start = text_format("START", font, 75, WHITE)
         '''    
         if selected=="options":
-            text_music=text_format("OPTIONS", font, 75, blue)
+            text_music=text_format("OPTIONS", font, 75, BLUE)
         else:
-            text_music = text_format("OPTIONS", font, 75, white)    
+            text_music = text_format("OPTIONS", font, 75, WHITE)    
         '''    
-        if selected=="quit":
-            text_quit=text_format("QUIT", font, 75, blue)
+        if selected=="credits":
+            text_credit=text_format("CREDITS", font, 75, BLUE)
         else:
-            text_quit = text_format("QUIT", font, 75, white)
+            text_credit = text_format("CREDITS", font, 75, WHITE)        
+        
+        if selected=="quit":
+            text_quit=text_format("QUIT", font, 75, BLUE)
+        else:
+            text_quit = text_format("QUIT", font, 75, WHITE)
+            
+        #credits=text_format("Made by: Ella Adam and Rupak Kannan", font, 40, LIGHTBLUE)
 
         title_rect=title.get_rect()
         start_rect=text_start.get_rect()
         #music_rect=text_music.get_rect()
+        credits_rect=text_credit.get_rect()
         quit_rect=text_quit.get_rect()
+        #credits_rect=credits.get_rect()
 
         # Main Menu Text
+        #----------------------
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 300))
         #screen.blit(text_music, (screen_width/2 - (music_rect[2]/2), 360))
-        screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 360))
+        screen.blit(text_credit, (screen_width/2 - (credits_rect[2]/2), 360))
+        screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 420))
+        #screen.blit(credits, (screen_width/3 - (credits_rect[3]/3), 560))
         
         pygame.display.update()
         clock.tick(FPS)
         
         #Title
         pygame.display.set_caption("OddBall Gaming")
-
-
 
 
 
@@ -252,11 +266,20 @@ def game_library():
     
     #print("I'm switching screens!!!")
     print("""
+    
+    
+    
+    
     Use the number keys to select the game you want to play, then hit \"enter\":
     1 = Battleship
     2 = Pong
     3 = Space Shooters
-    4 = Return""")
+    4 = Return
+    
+    
+    
+    
+    """)
     
     library = True
     selected ="space"
@@ -310,27 +333,27 @@ def game_library():
         #Screen (AKA Background) 
         screen.fill(BLACK)
         
-        title=text_format("SELECT A GAME", font, 90, green)
+        title=text_format("SELECT A GAME", font, 90, GREEN)
         
         if selected=="space":
-            text_space=text_format("SPACE SHOOTERS", font, 75, blue)
+            text_space=text_format("SPACE SHOOTERS", font, 75, BLUE)
         else:
-            text_space = text_format("SPACE SHOOTERS", font, 75, white)
+            text_space = text_format("SPACE SHOOTERS", font, 75, WHITE)
             
         if selected=="pong":
-            text_pong=text_format("PONG", font, 75, blue)
+            text_pong=text_format("PONG", font, 75, BLUE)
         else:
-            text_pong = text_format("PONG", font, 75, white)
+            text_pong = text_format("PONG", font, 75, WHITE)
             
         if selected=="break":
-            text_bout=text_format("BREAKOUT", font, 75, blue)
+            text_bout=text_format("BREAKOUT", font, 75, BLUE)
         else:
-            text_bout = text_format("BREAKOUT", font, 75, white)        
+            text_bout = text_format("BREAKOUT", font, 75, WHITE)        
                 
         if selected=="return":
-            text_back=text_format("RETURN", font, 75, blue)
+            text_back=text_format("RETURN", font, 75, BLUE)
         else:
-            text_back = text_format("RETURN", font, 75, white)
+            text_back = text_format("RETURN", font, 75, WHITE)
                     
             #Only for "Select a Game"
         title_rect=title.get_rect()
@@ -355,6 +378,72 @@ def game_library():
         #Title
         pygame.display.set_caption("Game Library")
         
+ 
+def credits():
+    print("I DID IT!!")
+    
+    WHITE = (255,255,255)
+    BLUE = (0, 0, 255)
+    DARKBLUE = (36,90,190)
+    LIGHTBLUE = (0,176,240)
+    RED = (255,0,0)
+    ORANGE = (255,100,0)
+    YELLOW = (255,255,0)
+    GREEN = (0, 255, 0)
+    BLACK = (0,0,0)  
+    GRAY = (50, 50, 50) 
+    
+    
+    credits = True
+    selected ="return"
+    while credits:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+                #If quit is not hit, loop music
+            elif event.type == pygame.constants.USEREVENT:
+                pygame.mixer.music.load('Music/Platformer2.mp3')
+                pygame.mixer.music.play()
+            
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_UP or event.key==pygame.K_1:
+                    selected="return"
+                    
+                    
+                if event.key==pygame.K_RETURN:
+                    
+                    if selected=="return":
+                        main_menu()
+
+        # Main Menu UI
+        
+        #Screen (AKA Background) 
+        screen.fill(BLACK)
+        
+        title=text_format("CREDITS", font, 90, GREEN)
+        
+        if selected=="return":
+            text_back=text_format("RETURN", font, 75, BLUE)
+        else:
+            text_back = text_format("RETURN", font, 75, WHITE)            
+      
+
+        title_rect=title.get_rect()
+        back_rect=text_back.get_rect()
+
+        # Main Menu Text
+        #----------------------
+        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
+        screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 500))
+        
+        pygame.display.update()
+        clock.tick(FPS)
+        
+        #Title
+        pygame.display.set_caption("OddBall Gaming")
+    
+ 
         
         
 #---------------Gameing Screens------------------------------------------
@@ -703,17 +792,17 @@ def P1():
             
             title=text_format("PLAYER 1 WINS?", font, 90, LIGHTBLUE)
             
-            again=text_format("PLAY AGAIN?", font, 80, green)
+            again=text_format("PLAY AGAIN?", font, 80, GREEN)
                  
             if selected=="yes":
-                text_yes=text_format("YES", font, 75, blue)
+                text_yes=text_format("YES", font, 75, BLUE)
             else:
-                text_yes = text_format("YES", font, 75, white)
+                text_yes = text_format("YES", font, 75, WHITE)
             
             if selected=="no":
-                text_no=text_format("NO", font, 75, blue)
+                text_no=text_format("NO", font, 75, BLUE)
             else:
-                text_no = text_format("NO", font, 75, white)            
+                text_no = text_format("NO", font, 75, WHITE)            
                       
             #Only for "Title"
             title_rect=title.get_rect()
@@ -786,17 +875,17 @@ def P2():
             
             title=text_format("PLAYER 2 WINS?", font, 90, RED)
             
-            again=text_format("PLAY AGAIN?", font, 80, green)
+            again=text_format("PLAY AGAIN?", font, 80, GREEN)
                  
             if selected=="yes":
-                text_yes=text_format("YES", font, 75, blue)
+                text_yes=text_format("YES", font, 75, BLUE)
             else:
-                text_yes = text_format("YES", font, 75, white)
+                text_yes = text_format("YES", font, 75, WHITE)
             
             if selected=="no":
-                text_no=text_format("NO", font, 75, blue)
+                text_no=text_format("NO", font, 75, BLUE)
             else:
-                text_no = text_format("NO", font, 75, white)            
+                text_no = text_format("NO", font, 75, WHITE)            
                       
             #Only for "Title"
             title_rect=title.get_rect()
@@ -1172,17 +1261,17 @@ def ReplayL():
             #Screen (AKA Background) 
             screen.fill(black)
             
-            title=text_format("TRY AGAIN?", font, 90, green)
+            title=text_format("TRY AGAIN?", font, 90, GREEN)
                  
             if selected=="yes":
-                text_yes=text_format("YES", font, 75, blue)
+                text_yes=text_format("YES", font, 75, BLUE)
             else:
-                text_yes = text_format("YES", font, 75, white)
+                text_yes = text_format("YES", font, 75, WHITE)
             
             if selected=="no":
-                text_no=text_format("NO", font, 75, blue)
+                text_no=text_format("NO", font, 75, BLUE)
             else:
-                text_no = text_format("NO", font, 75, white)            
+                text_no = text_format("NO", font, 75, WHITE)            
                       
             #Only for "Title"
             title_rect=title.get_rect()
@@ -1242,17 +1331,17 @@ def ReplayW():
             #Screen (AKA Background) 
             screen.fill(black)
             
-            title=text_format("PLAY AGAIN?", font, 90, green)
+            title=text_format("PLAY AGAIN?", font, 90, GREEN)
                  
             if selected=="yes":
-                text_yes=text_format("YES", font, 75, blue)
+                text_yes=text_format("YES", font, 75, BLUE)
             else:
-                text_yes = text_format("YES", font, 75, white)
+                text_yes = text_format("YES", font, 75, WHITE)
             
             if selected=="no":
-                text_no=text_format("NO", font, 75, blue)
+                text_no=text_format("NO", font, 75, BLUE)
             else:
-                text_no = text_format("NO", font, 75, white)            
+                text_no = text_format("NO", font, 75, WHITE)            
                       
             #Only for "Title"
             title_rect=title.get_rect()

@@ -66,80 +66,63 @@ font = "Retro.ttf"
 clock = pygame.time.Clock()
 FPS=30
 
-
-def music():
-    music = True
-    selected ="off"
-    while music:
+        
+def start_msg():
+    msg = True
+    selected ="continue"
+    while msg:
         for event in pygame.event.get():
+            pygame.mixer.music.stop()
             if event.type==pygame.QUIT:
                 pygame.quit()
                 quit()
-                #If quit is not hit, loop music
-            elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('Music/Platformer2.mp3')
-                pygame.mixer.music.play() 
                 
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_UP or event.key==pygame.K_1:
-                    selected="off"
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
-                    selected="on"
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
-                    selected="return"             
+                    selected="continue"
                     
                 if event.key==pygame.K_RETURN:
-                    if selected=="off":
-                        pygame.mixer.music.stop()
-                    if selected=="on":
-                        pygame.mixer.music.load('Music/Platformer2.mp3')
-                        pygame.mixer.music.play()
-                    if selected=="return":
+                    if selected=="continue":
                         main_menu()
-                        
+                
         # Main Menu UI
         
         #Screen (AKA Background) 
-        screen.fill(black)
+        screen.fill(BLACK)
         
-        title=text_format("OPTIONS", font, 90, GREEN)
-        music=text_format("MUSIC:", font, 50, YELLOW)
+        title=text_format("WELCOME!", font, 90, GREEN)
         
-        if selected=="off":
-            text_off=text_format("OFF", font, 75, BLUE)
+        instuction1=text_format("Use the Number Keys", font, 90, LIGHTBLUE)
+        instuction2=text_format("and", font, 90, LIGHTBLUE)
+        instuction3=text_format("Enter Key to select ", font, 90, LIGHTBLUE)
+        
+        
+        if selected=="continue":
+            text_start=text_format("CONTINUE", font, 75, BLUE)
         else:
-            text_off = text_format("OFF", font, 75, WHITE)
-            
-        if selected=="on":
-            text_on=text_format("ON", font, 75, BLUE)
-        else:
-            text_on = text_format("ON", font, 75, WHITE)
-            
-        if selected=="return":
-            text_back=text_format("RETURN", font, 75, BLUE)
-        else:
-            text_back = text_format("RETURN", font, 75, WHITE)            
+            text_start = text_format("CONTINUE", font, 75, WHITE)
 
         title_rect=title.get_rect()
-        music_rect=music.get_rect()
-        off_rect=text_off.get_rect()
-        on_rect=text_on.get_rect()
-        back_rect=text_back.get_rect()
+        word1_rect=title.get_rect()
+        word2_rect=title.get_rect()
+        word3_rect=title.get_rect()
+        start_rect=text_start.get_rect()
+    
 
         # Main Menu Text
+        #----------------------
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
+        screen.blit(instuction1, (screen_width/3 - (word1_rect[2]/2), 200))
+        screen.blit(instuction2, (screen_width/2 - (word2_rect[3]/2), 270))
+        screen.blit(instuction3, (screen_width/3 - (word3_rect[2]/2), 330))
+        screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 500))
         
-        screen.blit(music, (screen_width/2 - (music_rect[2]/2), 180))
-        screen.blit(text_off, (screen_width/2 - (off_rect[2]/2), 270))
-        screen.blit(text_on, (screen_width/2 - (on_rect[2]/2), 330))
-        
-        screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 390))
         
         pygame.display.update()
         clock.tick(FPS)
         
         #Title
-        pygame.display.set_caption("OddBall Gaming")        
+        pygame.display.set_caption("Information")    
 
 
 # Main Menu
@@ -162,6 +145,8 @@ def main_menu():
     selected ="start"
     while menu:
         for event in pygame.event.get():
+            pygame.mixer.music.load('Music/Platformer2.mp3')
+            pygame.mixer.music.play()             
             if event.type==pygame.QUIT:
                 pygame.quit()
                 quit()
@@ -192,10 +177,10 @@ def main_menu():
                     '''    
                     if selected=="options":
                         music()   
-                    '''    
+                        
                     if selected=="credits":
                         credits()
-                    
+                    '''
                     if selected=="quit":
                         pygame.quit()
                         quit()
@@ -216,34 +201,34 @@ def main_menu():
             text_music=text_format("OPTIONS", font, 75, BLUE)
         else:
             text_music = text_format("OPTIONS", font, 75, WHITE)    
-        '''    
+           
         if selected=="credits":
             text_credit=text_format("CREDITS", font, 75, BLUE)
         else:
             text_credit = text_format("CREDITS", font, 75, WHITE)        
-        
+        ''' 
         if selected=="quit":
             text_quit=text_format("QUIT", font, 75, BLUE)
         else:
             text_quit = text_format("QUIT", font, 75, WHITE)
             
-        #credits=text_format("Made by: Ella Adam and Rupak Kannan", font, 40, LIGHTBLUE)
+        credits=text_format("Made by: Ella Adam and Rupak Kannan", font, 40, LIGHTBLUE)
 
         title_rect=title.get_rect()
         start_rect=text_start.get_rect()
         #music_rect=text_music.get_rect()
-        credits_rect=text_credit.get_rect()
+        #credits_rect=text_credit.get_rect()
         quit_rect=text_quit.get_rect()
-        #credits_rect=credits.get_rect()
+        credits_rect=credits.get_rect()
 
         # Main Menu Text
         #----------------------
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 300))
         #screen.blit(text_music, (screen_width/2 - (music_rect[2]/2), 360))
-        screen.blit(text_credit, (screen_width/2 - (credits_rect[2]/2), 360))
-        screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 420))
-        #screen.blit(credits, (screen_width/3 - (credits_rect[3]/3), 560))
+        #screen.blit(text_credit, (screen_width/2 - (credits_rect[2]/2), 360))
+        screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 360))
+        screen.blit(credits, (screen_width/3 - (credits_rect[3]/3), 560))
         
         pygame.display.update()
         clock.tick(FPS)
@@ -377,8 +362,82 @@ def game_library():
         
         #Title
         pygame.display.set_caption("Game Library")
+
+def music():
+    music = True
+    selected ="off"
+    while music:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+                #If quit is not hit, loop music
+            elif event.type == pygame.constants.USEREVENT:
+                pygame.mixer.music.load('Music/Platformer2.mp3')
+                pygame.mixer.music.play() 
+                
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_UP or event.key==pygame.K_1:
+                    selected="off"
+                elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
+                    selected="on"
+                elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
+                    selected="return"             
+                    
+                if event.key==pygame.K_RETURN:
+                    if selected=="off":
+                        pygame.mixer.music.stop()
+                    if selected=="on":
+                        pygame.mixer.music.load('Music/Platformer2.mp3')
+                        pygame.mixer.music.play()
+                    if selected=="return":
+                        main_menu()
+                        
+        # Main Menu UI
         
- 
+        #Screen (AKA Background) 
+        screen.fill(black)
+        
+        title=text_format("OPTIONS", font, 90, GREEN)
+        music=text_format("MUSIC:", font, 50, YELLOW)
+        
+        if selected=="off":
+            text_off=text_format("OFF", font, 75, BLUE)
+        else:
+            text_off = text_format("OFF", font, 75, WHITE)
+            
+        if selected=="on":
+            text_on=text_format("ON", font, 75, BLUE)
+        else:
+            text_on = text_format("ON", font, 75, WHITE)
+            
+        if selected=="return":
+            text_back=text_format("RETURN", font, 75, BLUE)
+        else:
+            text_back = text_format("RETURN", font, 75, WHITE)            
+
+        title_rect=title.get_rect()
+        music_rect=music.get_rect()
+        off_rect=text_off.get_rect()
+        on_rect=text_on.get_rect()
+        back_rect=text_back.get_rect()
+
+        # Main Menu Text
+        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
+        
+        screen.blit(music, (screen_width/2 - (music_rect[2]/2), 180))
+        screen.blit(text_off, (screen_width/2 - (off_rect[2]/2), 270))
+        screen.blit(text_on, (screen_width/2 - (on_rect[2]/2), 330))
+        
+        screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 390))
+        
+        pygame.display.update()
+        clock.tick(FPS)
+        
+        #Title
+        pygame.display.set_caption("Options") 
+        
+'''
 def credits():
     print("I DID IT!!")
     
@@ -423,6 +482,12 @@ def credits():
         
         title=text_format("CREDITS", font, 90, GREEN)
         
+        made=text_format("Made By:", font, 80, LIGHTBLUE)
+        
+        ella=text_format("Ella Adam", font, 80, LIGHTBLUE)
+        
+        rupak=text_format("Rupak Kannan", font, 80, LIGHTBLUE)
+        
         if selected=="return":
             text_back=text_format("RETURN", font, 75, BLUE)
         else:
@@ -430,11 +495,17 @@ def credits():
       
 
         title_rect=title.get_rect()
+        made_rect=made.get_rect()
+        ella_rect=ella.get_rect()
+        rupak_rect=rupak.get_rect()
         back_rect=text_back.get_rect()
 
         # Main Menu Text
         #----------------------
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
+        screen.blit(made, (screen_width/2 - (made_rect[2]/2), 150))
+        screen.blit(ella, (screen_width/2 - (ella_rect[2]/2), 250))
+        screen.blit(rupak, (screen_width/2 - (rupak_rect[2]/2), 350))
         screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 500))
         
         pygame.display.update()
@@ -443,7 +514,7 @@ def credits():
         #Title
         pygame.display.set_caption("OddBall Gaming")
     
- 
+''' 
         
         
 #---------------Gameing Screens------------------------------------------
@@ -1367,6 +1438,7 @@ def ReplayW():
 #Initialize the Game
 print("\"This is a arrow key and number based selector\"")
 
-main_menu()
+#main_menu()
+start_msg()
 pygame.quit()
 quit()

@@ -66,64 +66,6 @@ font = "Retro.ttf"
 clock = pygame.time.Clock()
 FPS=30
 
-        
-def start_msg():
-    msg = True
-    selected ="continue"
-    while msg:
-        for event in pygame.event.get():
-            pygame.mixer.music.stop()
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                quit()
-                
-            if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_UP or event.key==pygame.K_1:
-                    selected="continue"
-                    
-                if event.key==pygame.K_RETURN:
-                    if selected=="continue":
-                        main_menu()
-                
-        # Main Menu UI
-        
-        #Screen (AKA Background) 
-        screen.fill(BLACK)
-        
-        title=text_format("WELCOME!", font, 90, GREEN)
-        
-        instuction1=text_format("Use the Number Keys", font, 90, LIGHTBLUE)
-        instuction2=text_format("and", font, 90, LIGHTBLUE)
-        instuction3=text_format("Enter Key to select ", font, 90, LIGHTBLUE)
-        
-        
-        if selected=="continue":
-            text_start=text_format("CONTINUE", font, 75, BLUE)
-        else:
-            text_start = text_format("CONTINUE", font, 75, WHITE)
-
-        title_rect=title.get_rect()
-        word1_rect=title.get_rect()
-        word2_rect=title.get_rect()
-        word3_rect=title.get_rect()
-        start_rect=text_start.get_rect()
-    
-
-        # Main Menu Text
-        #----------------------
-        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-        screen.blit(instuction1, (screen_width/3 - (word1_rect[2]/2), 200))
-        screen.blit(instuction2, (screen_width/2 - (word2_rect[3]/2), 270))
-        screen.blit(instuction3, (screen_width/3 - (word3_rect[2]/2), 330))
-        screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 500))
-        
-        
-        pygame.display.update()
-        clock.tick(FPS)
-        
-        #Title
-        pygame.display.set_caption("Information")    
-
 
 # Main Menu
 def main_menu():
@@ -139,14 +81,11 @@ def main_menu():
     BLACK = (0,0,0)  
     GRAY = (50, 50, 50)
     
-    
-    
     menu = True
     selected ="start"
     while menu:
         for event in pygame.event.get():
-            pygame.mixer.music.load('Music/Platformer2.mp3')
-            pygame.mixer.music.play()             
+                    
             if event.type==pygame.QUIT:
                 pygame.quit()
                 quit()
@@ -158,29 +97,14 @@ def main_menu():
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_UP or event.key==pygame.K_1:
                     selected="start"
-                    
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
-                    selected="credits"                
                    
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
+                elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
                     selected="quit"
-                '''    
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
-                    selected="options"
-                ''' 
-                    
-                       
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="start":
                         game_library()
-                    '''    
-                    if selected=="options":
-                        music()   
                         
-                    if selected=="credits":
-                        credits()
-                    '''
                     if selected=="quit":
                         pygame.quit()
                         quit()
@@ -196,17 +120,7 @@ def main_menu():
             text_start=text_format("START", font, 75, BLUE)
         else:
             text_start = text_format("START", font, 75, WHITE)
-        '''    
-        if selected=="options":
-            text_music=text_format("OPTIONS", font, 75, BLUE)
-        else:
-            text_music = text_format("OPTIONS", font, 75, WHITE)    
-           
-        if selected=="credits":
-            text_credit=text_format("CREDITS", font, 75, BLUE)
-        else:
-            text_credit = text_format("CREDITS", font, 75, WHITE)        
-        ''' 
+        
         if selected=="quit":
             text_quit=text_format("QUIT", font, 75, BLUE)
         else:
@@ -216,19 +130,13 @@ def main_menu():
 
         title_rect=title.get_rect()
         start_rect=text_start.get_rect()
-        #music_rect=text_music.get_rect()
-        #credits_rect=text_credit.get_rect()
         quit_rect=text_quit.get_rect()
-        credits_rect=credits.get_rect()
 
         # Main Menu Text
         #----------------------
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 300))
-        #screen.blit(text_music, (screen_width/2 - (music_rect[2]/2), 360))
-        #screen.blit(text_credit, (screen_width/2 - (credits_rect[2]/2), 360))
         screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 360))
-        screen.blit(credits, (screen_width/3 - (credits_rect[3]/3), 560))
         
         pygame.display.update()
         clock.tick(FPS)
@@ -240,6 +148,8 @@ def main_menu():
 
 #Game Selecting Screen
 def game_library():
+    
+    print("\"This is a number key based selector\"")
     
     WHITE = (255,255,255)
     DARKBLUE = (36,90,190)
@@ -363,158 +273,6 @@ def game_library():
         #Title
         pygame.display.set_caption("Game Library")
 
-def music():
-    music = True
-    selected ="off"
-    while music:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                quit()
-                #If quit is not hit, loop music
-            elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('Music/Platformer2.mp3')
-                pygame.mixer.music.play() 
-                
-            if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_UP or event.key==pygame.K_1:
-                    selected="off"
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
-                    selected="on"
-                elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
-                    selected="return"             
-                    
-                if event.key==pygame.K_RETURN:
-                    if selected=="off":
-                        pygame.mixer.music.stop()
-                    if selected=="on":
-                        pygame.mixer.music.load('Music/Platformer2.mp3')
-                        pygame.mixer.music.play()
-                    if selected=="return":
-                        main_menu()
-                        
-        # Main Menu UI
-        
-        #Screen (AKA Background) 
-        screen.fill(black)
-        
-        title=text_format("OPTIONS", font, 90, GREEN)
-        music=text_format("MUSIC:", font, 50, YELLOW)
-        
-        if selected=="off":
-            text_off=text_format("OFF", font, 75, BLUE)
-        else:
-            text_off = text_format("OFF", font, 75, WHITE)
-            
-        if selected=="on":
-            text_on=text_format("ON", font, 75, BLUE)
-        else:
-            text_on = text_format("ON", font, 75, WHITE)
-            
-        if selected=="return":
-            text_back=text_format("RETURN", font, 75, BLUE)
-        else:
-            text_back = text_format("RETURN", font, 75, WHITE)            
-
-        title_rect=title.get_rect()
-        music_rect=music.get_rect()
-        off_rect=text_off.get_rect()
-        on_rect=text_on.get_rect()
-        back_rect=text_back.get_rect()
-
-        # Main Menu Text
-        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-        
-        screen.blit(music, (screen_width/2 - (music_rect[2]/2), 180))
-        screen.blit(text_off, (screen_width/2 - (off_rect[2]/2), 270))
-        screen.blit(text_on, (screen_width/2 - (on_rect[2]/2), 330))
-        
-        screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 390))
-        
-        pygame.display.update()
-        clock.tick(FPS)
-        
-        #Title
-        pygame.display.set_caption("Options") 
-        
-'''
-def credits():
-    print("I DID IT!!")
-    
-    WHITE = (255,255,255)
-    BLUE = (0, 0, 255)
-    DARKBLUE = (36,90,190)
-    LIGHTBLUE = (0,176,240)
-    RED = (255,0,0)
-    ORANGE = (255,100,0)
-    YELLOW = (255,255,0)
-    GREEN = (0, 255, 0)
-    BLACK = (0,0,0)  
-    GRAY = (50, 50, 50) 
-    
-    
-    credits = True
-    selected ="return"
-    while credits:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                quit()
-                #If quit is not hit, loop music
-            elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('Music/Platformer2.mp3')
-                pygame.mixer.music.play()
-            
-            if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_UP or event.key==pygame.K_1:
-                    selected="return"
-                    
-                    
-                if event.key==pygame.K_RETURN:
-                    
-                    if selected=="return":
-                        main_menu()
-
-        # Main Menu UI
-        
-        #Screen (AKA Background) 
-        screen.fill(BLACK)
-        
-        title=text_format("CREDITS", font, 90, GREEN)
-        
-        made=text_format("Made By:", font, 80, LIGHTBLUE)
-        
-        ella=text_format("Ella Adam", font, 80, LIGHTBLUE)
-        
-        rupak=text_format("Rupak Kannan", font, 80, LIGHTBLUE)
-        
-        if selected=="return":
-            text_back=text_format("RETURN", font, 75, BLUE)
-        else:
-            text_back = text_format("RETURN", font, 75, WHITE)            
-      
-
-        title_rect=title.get_rect()
-        made_rect=made.get_rect()
-        ella_rect=ella.get_rect()
-        rupak_rect=rupak.get_rect()
-        back_rect=text_back.get_rect()
-
-        # Main Menu Text
-        #----------------------
-        screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-        screen.blit(made, (screen_width/2 - (made_rect[2]/2), 150))
-        screen.blit(ella, (screen_width/2 - (ella_rect[2]/2), 250))
-        screen.blit(rupak, (screen_width/2 - (rupak_rect[2]/2), 350))
-        screen.blit(text_back, (screen_width/2 - (back_rect[2]/2), 500))
-        
-        pygame.display.update()
-        clock.tick(FPS)
-        
-        #Title
-        pygame.display.set_caption("OddBall Gaming")
-    
-''' 
         
         
 #---------------Gameing Screens------------------------------------------
@@ -859,7 +617,7 @@ def P1():
             # Main Menu UI
             
             #Screen (AKA Background) 
-            screen.fill(black)
+            screen.fill(BLACK)
             
             title=text_format("PLAYER 1 WINS?", font, 90, LIGHTBLUE)
             
@@ -942,7 +700,7 @@ def P2():
             # Main Menu UI
             
             #Screen (AKA Background) 
-            screen.fill(black)
+            screen.fill(BLACK)
             
             title=text_format("PLAYER 2 WINS?", font, 90, RED)
             
@@ -1174,22 +932,6 @@ def breakout():
 
                 pygame.mixer.music.stop()                
                 ReplayL()
-                #messagebox.askyesno(title="Play Again?", message="Want to play again?")
-                '''
-                if messagebox.askyesno() == True:
-                    Repl()
-                    quit()
-                else:
-                    screen_width=800
-                    screen_height=600                    
-                    pygame.mixer.music.load('Music/Platformer2.mp3')
-                    pygame.mixer.music.play()                    
-                    game_library()
-                    quit()
-                '''    
-     
-                #Stop the Game
-                #carryOn=False
                 '''
                # declare the window
                 window = Tk()
@@ -1234,38 +976,6 @@ def breakout():
                 pygame.mixer.music.stop()
                 ReplayW()
                 
-                #Stop the Game
-                #carryOn=False
-                #tk.messagebox.askyesno(title="Play Again?", message="Want to play again?", **options)
-                '''
-                messagebox.askyesno(title="Play Again?", message="Want to play again?")
-                
-                if messagebox.askyesno() == True:
-                    breakout()
-                    quit()
-                else:
-                    screen_width=800
-                    screen_height=600                    
-                    pygame.mixer.music.load('Music/Platformer2.mp3')
-                    pygame.mixer.music.play()                    
-                    game_library()
-                    quit()                
-                
-                
-                #-----POPUP WINDOW----
-                # declare the window
-                window = Tk()
-                # set window title
-                window.title("Play Again?")
-                # set window width and height
-                window.configure(width=500, height=300)
-                # set window background color
-                window.configure(bg='lightgray')
-                
-                yes = button(text="yes")
-            
-                window.mainloop()        
-                '''
         # --- Drawing code should go here
         # First, clear the screen to dark blue.
         screen.fill(BLACK)
@@ -1330,7 +1040,7 @@ def ReplayL():
             # Main Menu UI
             
             #Screen (AKA Background) 
-            screen.fill(black)
+            screen.fill(BLACK)
             
             title=text_format("TRY AGAIN?", font, 90, GREEN)
                  
@@ -1400,7 +1110,7 @@ def ReplayW():
             # Main Menu UI
             
             #Screen (AKA Background) 
-            screen.fill(black)
+            screen.fill(BLACK)
             
             title=text_format("PLAY AGAIN?", font, 90, GREEN)
                  
@@ -1436,9 +1146,14 @@ def ReplayW():
     
 
 #Initialize the Game
-print("\"This is a arrow key and number based selector\"")
+print("\"This is a number key based selector\"")
+root = tk.Tk()
+# Hide it with .withdraw
+root.withdraw()    
+
+tk.messagebox.showinfo(title='Information', message='Use the Number Keys and the Enter Key to Select')    
 
 #main_menu()
-start_msg()
+main_menu()
 pygame.quit()
 quit()

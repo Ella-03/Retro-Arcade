@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #Ella Adam
-#1/15/2021 --> 3/12/2021 --> 4/02/2021 --> 4/09/2021
+#1/15/2021 --> 3/12/2021 --> 4/02/2021 --> 4/09/2021 --> 4/30/2021
 
 import pygame
 from pygame.locals import *
@@ -131,12 +131,15 @@ def main_menu():
         title_rect=title.get_rect()
         start_rect=text_start.get_rect()
         quit_rect=text_quit.get_rect()
+        credits_rect=credits.get_rect()
 
         # Main Menu Text
         #----------------------
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 300))
         screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 360))
+        screen.blit(credits, (screen_width/3 - (credits_rect[3]/3), 560))
+
         
         pygame.display.update()
         clock.tick(FPS)

@@ -109,7 +109,7 @@ def main_menu():
                         pygame.quit()
                         quit()
 
-        # Main Menu UI
+        # Main Menu UI -
         
         #Screen (AKA Background) 
         screen.fill(BLACK)
